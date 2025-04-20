@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "nba-playoffs-bracket": {
+    "nba-playoffs-game": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/nba-playoffs-bracket",
+            "outputPath": "dist/nba-playoffs-game",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "nba-playoffs-bracket:build:production"
+              "buildTarget": "nba-playoffs-game:build:production"
             },
             "development": {
-              "buildTarget": "nba-playoffs-bracket:build:development"
+              "buildTarget": "nba-playoffs-game:build:development"
             }
           },
           "defaultConfiguration": "development"

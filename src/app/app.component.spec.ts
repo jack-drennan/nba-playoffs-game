@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'nba-playoffs-bracket' title`, () => {
+  it(`should have the 'nba-playoffs-game' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('nba-playoffs-bracket');
+    expect(app.title).toEqual('nba-playoffs-game');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, nba-playoffs-bracket');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, nba-playoffs-game');
   });
 });
