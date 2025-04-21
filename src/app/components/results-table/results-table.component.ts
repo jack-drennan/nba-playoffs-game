@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NbaService } from '../../services/nba.service';
 import { ApiResponse, NBAGame } from '@balldontlie/sdk';
 import { TableModule } from 'primeng/table';
-import { teams, playerTeams } from '../../utils/tableData';
+import { teams, playerTeams, team } from '../../utils/tableData';
 
 @Component({
   selector: 'app-results-table',

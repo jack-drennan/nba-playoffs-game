@@ -17,13 +17,13 @@
         <ng-template #body let-playerTeams>
             <tr>
                 <td>{{ playerTeams.player }}</td>
-                <td>{{ playerTeams.teams[0].name }}</td>
+                <td><img src="{{ playerTeams.teams[0].logo }}" alt="{{ playerTeams.teams[0].name }}"></td>
                 <td>{{ playerTeams.teams[0].points }}</td>
-                <td>{{ playerTeams.teams[1].name }}</td>
+                <td><img src="{{ playerTeams.teams[1].logo }}" alt="{{ playerTeams.teams[1].name }}"></td>
                 <td>{{ playerTeams.teams[1].points }}</td>
-                <td>{{ playerTeams.teams[2].name }}</td>
+                <td><img src="{{ playerTeams.teams[2].logo }}" alt="{{ playerTeams.teams[2].name }}"></td>
                 <td>{{ playerTeams.teams[2].points }}</td>
-                <td>{{ playerTeams.teams[3].name }}</td>
+                <td><img src="{{ playerTeams.teams[3].logo }}" alt="{{ playerTeams.teams[3].name }}"></td>
                 <td>{{ playerTeams.teams[3].points }}</td>
                 <td>{{ playerTeams.points }}</td>
             </tr>
