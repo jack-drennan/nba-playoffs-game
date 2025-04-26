@@ -1,11 +1,10 @@
 img {
     height: 3rem;
-}
-
-.point-tag {
-    padding: 0.8rem;
-}
-
-p-card {
     text-align: center;
+}
+
+.status {
+    hr {
+        opacity: 0.25;
+    }
 }

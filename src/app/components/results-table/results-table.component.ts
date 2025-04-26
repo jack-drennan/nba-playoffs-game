@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { NbaService } from '../../services/nba.service';
 import { ApiResponse, NBAGame } from '@balldontlie/sdk';
 import { TableModule } from 'primeng/table';
-import { teams, playerTeams, team } from '../../utils/tableData';
+import { TagModule } from 'primeng/tag';
+import { CardModule } from 'primeng/card';
+import { teams, playerTeams } from '../../utils/tableData';
 
 @Component({
   selector: 'app-results-table',
-  imports: [CommonModule, TableModule],
+  imports: [CommonModule, TableModule, TagModule, CardModule],
   templateUrl: './results-table.component.html',
   styleUrl: './results-table.component.css'
 })
@@ -22,7 +24,7 @@ export class ResultsTableComponent implements OnInit{
   playerTeams = playerTeams;
 
   async ngOnInit(): Promise<void> {
-    this.games = await this.nbaService.getGameData([2024], true, '2024-04-19');
+    this.games = await this.nbaService.getPlayoffGameData([2024], true);
     this.parseGameData();
     this.setPoints();
   }

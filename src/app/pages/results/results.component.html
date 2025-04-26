@@ -1,2 +1,12 @@
-<h1 id="results-page-header">NBA Playoff Pool '25</h1>
-<app-results-table id="results-table"></app-results-table>
+<div class="results-page">
+    <div id="header-card">
+        <p-card [style]="{ background: 'gray' }">
+            <h1 id="results-page-header">NBA Playoff Pool '25</h1>
+        </p-card>
+    </div>
+    <div class="info-cards">
+        <app-todays-games-card></app-todays-games-card>
+        <app-todays-games-card></app-todays-games-card>
+    </div> 
+    <app-results-table id="results-table"></app-results-table>
+</div>

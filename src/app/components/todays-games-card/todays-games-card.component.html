@@ -1,0 +1,18 @@
+<p-card header="Today's Games" [style]="{ background: 'purple' }">
+    <p-table [value]="todaysGames" [loading]="loading">
+        <ng-template #header>
+            <tr>
+                <th>Home Team</th>
+                <th>Away Team</th>
+                <th>Game Status</th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-todaysGames>
+            <tr>
+                <td><img src="{{ todaysGames.home_team }}" alt=""></td>
+                <td><img src="{{ todaysGames.away_team }}" alt=""></td>
+                <td class="status">{{ todaysGames.game_result }}<hr>{{ todaysGames.game_status }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>

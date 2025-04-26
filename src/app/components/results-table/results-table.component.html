@@ -1,5 +1,5 @@
-<div class="card">
-    <p-table [value]="playerTeams" [loading]="loading" resizableColumns="true">
+<p-card header="Results" [style]="{ background: 'gray' }">
+    <p-table [value]="playerTeams" [loading]="loading">
         <ng-template #header>
             <tr>
                 <th>Name</th>
@@ -17,16 +17,34 @@
         <ng-template #body let-playerTeams>
             <tr>
                 <td>{{ playerTeams.player }}</td>
-                <td><img src="{{ playerTeams.teams[0].logo }}" alt="{{ playerTeams.teams[0].name }}"></td>
-                <td>{{ playerTeams.teams[0].points }}</td>
-                <td><img src="{{ playerTeams.teams[1].logo }}" alt="{{ playerTeams.teams[1].name }}"></td>
-                <td>{{ playerTeams.teams[1].points }}</td>
-                <td><img src="{{ playerTeams.teams[2].logo }}" alt="{{ playerTeams.teams[2].name }}"></td>
-                <td>{{ playerTeams.teams[2].points }}</td>
-                <td><img src="{{ playerTeams.teams[3].logo }}" alt="{{ playerTeams.teams[3].name }}"></td>
-                <td>{{ playerTeams.teams[3].points }}</td>
-                <td>{{ playerTeams.points }}</td>
+                <td class="team-data">
+                    <img src="{{ playerTeams.teams[0].logo }}" alt="{{ playerTeams.teams[0].name }}">
+                </td>
+                <td>
+                    <p-tag class="point-tag" severity="info" value="{{ playerTeams.teams[0].points }}" rounded="true"/>
+                </td>
+                <td>
+                    <img src="{{ playerTeams.teams[1].logo }}" alt="{{ playerTeams.teams[1].name }}">
+                </td>
+                <td>
+                    <p-tag class="point-tag" severity="info" value="{{ playerTeams.teams[1].points }}" rounded="true"/>
+                </td>
+                <td>
+                    <img src="{{ playerTeams.teams[2].logo }}" alt="{{ playerTeams.teams[2].name }}">
+                </td>
+                <td>
+                    <p-tag class="point-tag" severity="info" value="{{ playerTeams.teams[2].points }}" rounded="true"/>
+                </td>
+                <td>
+                    <img src="{{ playerTeams.teams[3].logo }}" alt="{{ playerTeams.teams[3].name }}">
+                </td>
+                <td>
+                    <p-tag class="point-tag" severity="info" value="{{ playerTeams.teams[3].points }}" rounded="true"/>
+                </td>
+                <td>
+                    <p-tag class="point-tag" severity="success" value="{{ playerTeams.points }}" rounded="true"/>
+                </td>
             </tr>
         </ng-template>
     </p-table>
-</div>
+</p-card>
