@@ -29,30 +29,6 @@ export class ResultsTableComponent implements OnInit{
     this.finishedGames = this.games.data.filter((resp) => resp.status === 'Final');
     this.parseGameData();
     this.setPoints();
-    this.getRemainingTeams();
-  }
-
-  getRemainingTeams() {
-    let allTeams = this.games.data.map(obj => obj.home_team.name);
-    let eliminatedTeams: string[] = [];
-    let remainingTeams: string[] = [...new Set(allTeams)];
-    for(const team in teams) {
-      if(teams[team].wins !== 0 && teams[team].wins % 4 === 0) {
-        this.finishedGames.forEach(game => {
-          if(game.home_team.name.toLowerCase() === team) {
-            eliminatedTeams.push(game.visitor_team.name);
-          }
-          if(game.visitor_team.name.toLowerCase() === team) {
-            eliminatedTeams.push(game.home_team.name);
-          }
-        })
-      }
-    }
-    eliminatedTeams = [...new Set(eliminatedTeams)];
-    eliminatedTeams.forEach(team => {
-      const index = remainingTeams.indexOf(team);
-      remainingTeams.splice(index, 1);
-    })
   }
 
   parseGameData() {
@@ -77,7 +53,10 @@ export class ResultsTableComponent implements OnInit{
       });
       player.points = points
     });
-    this.playerTeams.sort((a, b) => b.points - a.points);
+    this.playerTeams.sort((a, b) => {
+      return b.points - a.points || b.teams[0].points - a.teams[0].points || b.teams[1].points - a.teams[1].points ||
+        b.teams[2].points - a.teams[2].points || b.teams[3].points - a.teams[3].points;
+    });
     this.loading = false;
   }
 }
