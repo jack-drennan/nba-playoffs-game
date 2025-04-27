@@ -30,8 +30,8 @@ export class TodaysGamesCardComponent implements OnInit{
     todaysGames.forEach(game => {
       const gameStatus = new Date(game.status);
       const gameData = {
-        home_team: teams[game.home_team.name.toLowerCase()].logo,
-        away_team: teams[game.visitor_team.name.toLowerCase()].logo,
+        home_team_logo: teams[game.home_team.name.toLowerCase()].logo,
+        away_team_logo: teams[game.visitor_team.name.toLowerCase()].logo,
         game_status: `${game.home_team.abbreviation}: ${game.home_team_score} | 
           ${game.visitor_team.abbreviation}: ${game.visitor_team_score}`,
         game_result: 'Tipoff'

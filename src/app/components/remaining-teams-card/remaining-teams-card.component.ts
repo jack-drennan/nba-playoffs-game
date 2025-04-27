@@ -1,34 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NbaService } from '../../services/nba.service';
 import { ApiResponse, NBAGame } from '@balldontlie/sdk';
 import { TableModule } from 'primeng/table';
-import { TagModule } from 'primeng/tag';
 import { CardModule } from 'primeng/card';
-import { teams, playerTeams } from '../../utils/tableData';
+import { NbaService } from '../../services/nba.service';
+import { teams } from '../../utils/tableData';
 
 @Component({
-  selector: 'app-results-table',
-  imports: [CommonModule, TableModule, TagModule, CardModule],
-  templateUrl: './results-table.component.html',
-  styleUrl: './results-table.component.css'
+  selector: 'app-remaining-teams-card',
+  imports: [TableModule, CardModule],
+  templateUrl: './remaining-teams-card.component.html',
+  styleUrl: './remaining-teams-card.component.css'
 })
-
-export class ResultsTableComponent implements OnInit{
+export class RemainingTeamsCardComponent implements OnInit{
 
   constructor(private nbaService: NbaService) { }
 
   private games: ApiResponse<NBAGame[]> = {data: []};
   loading = true;
   teams = teams;
-  playerTeams = playerTeams;
   finishedGames: NBAGame[] = [];
+  remainingTeams: any[] = [];
+  teamList: string[] = [];
+  formattedTeams = [
+    {
+      teams: this.teamList
+    },
+    {
+      teams: this.teamList
+    },
+    {
+      teams: this.teamList
+    },
+    {
+      teams: this.teamList
+    }
+  ];
 
   async ngOnInit(): Promise<void> {
     this.games = await this.nbaService.getPlayoffGameData([2024], true);
     this.finishedGames = this.games.data.filter((resp) => resp.status === 'Final');
-    this.parseGameData();
-    this.setPoints();
+    await this.delay(750);
     this.getRemainingTeams();
   }
 
@@ -36,6 +47,7 @@ export class ResultsTableComponent implements OnInit{
     let allTeams = this.games.data.map(obj => obj.home_team.name);
     let eliminatedTeams: string[] = [];
     let remainingTeams: string[] = [...new Set(allTeams)];
+
     for(const team in teams) {
       if(teams[team].wins !== 0 && teams[team].wins % 4 === 0) {
         this.finishedGames.forEach(game => {
@@ -48,36 +60,32 @@ export class ResultsTableComponent implements OnInit{
         })
       }
     }
+
     eliminatedTeams = [...new Set(eliminatedTeams)];
     eliminatedTeams.forEach(team => {
       const index = remainingTeams.indexOf(team);
       remainingTeams.splice(index, 1);
     })
-  }
 
-  parseGameData() {
-    this.finishedGames.forEach(game => {
-      const homeTeam = game.home_team.name.toLowerCase();
-      const awayTeam = game.visitor_team.name.toLowerCase();
-      if(game.home_team_score > game.visitor_team_score){
-        this.teams[homeTeam].wins+=1;
-        this.teams[homeTeam].points = this.teams[homeTeam].wins * this.teams[homeTeam].pointValue;
-      } else {
-        this.teams[awayTeam].wins+=1;
-        this.teams[awayTeam].points = this.teams[awayTeam].wins * this.teams[awayTeam].pointValue;
-      }
-    });
-  }
+    this.remainingTeams = remainingTeams;
 
-  setPoints() {
-    this.playerTeams.forEach(player => {
-      let points = 0;
-      player.teams.forEach(team => {
-        points+= team.points;
-      });
-      player.points = points
-    });
-    this.playerTeams.sort((a, b) => b.points - a.points);
+    this.remainingTeams.forEach((team,i) => {
+      this.remainingTeams[i] = teams[team.toLowerCase()].logo;
+    })
+
+    const rows = Math.round(this.remainingTeams.length / 4);
+    const teamChunks = [];
+    for (let i = 0; i < this.remainingTeams.length; i += rows) {
+      teamChunks.push(this.remainingTeams.slice(i, i + rows));
+    }
+    teamChunks.forEach((chunk, i) => {
+      this.formattedTeams[i].teams = chunk;
+    })
+
     this.loading = false;
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }

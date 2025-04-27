@@ -16,12 +16,14 @@ export class NbaService {
   }
 
   async getTodaysGameData(seasons: number[], postseason: boolean) {
-    const todaysDate = new Date().toISOString().split('T')[0];
+    const todaysDate = new Date();
+    const offset = todaysDate.getTimezoneOffset();
+    const formattedDate = new Date(todaysDate.getTime() - (offset*60*1000)).toISOString().split('T')[0];
     const gameData = await this.nbaApi.getGames({
        seasons: seasons,
        postseason: postseason,
-       start_date: todaysDate,
-       end_date: todaysDate
+       start_date: formattedDate,
+       end_date: formattedDate
       });
     return gameData;
   }
